@@ -9,18 +9,18 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject boidPrefab;
     [SerializeField] private int boidCount;
 
-    private void Start()
+    private void Awake()
     {
-        if (boids.boidMovements.Count > 0) boids.boidMovements.Clear();
+        if (boids.boidTransforms.Count > 0) boids.boidTransforms.Clear();
 
         for(int i = 0; i < boidCount; i++)
         {
             float direction = Random.Range(0f, 360f);
 
-            Vector3 position = new Vector2(Random.Range(-10f, 10f), Random.Range(-10f, 10f));
+            Vector3 position = new Vector2(Random.Range(-20f, 20f), Random.Range(-20f, 20f));
             GameObject boid = Instantiate(boidPrefab, position, Quaternion.Euler(Vector3.forward * direction) * boidPrefab.transform.localRotation);
-            boid.transform.SetParent(transform);
-            boids.boidMovements.Add(boid.GetComponent<BoidMovement>());
+            //boid.transform.SetParent(transform);
+            boids.boidTransforms.Add(boid.transform);
         }
     }
 }
